@@ -31,7 +31,7 @@ public class QuizService {
         questionAnswerRepo.saveAll(answers);
     }
 
-    public List<QuestionAnswer> getAnswersById(int id) {
+    public List<QuestionAnswer> getAnswersById(Long id) {
         return questionAnswerRepo.findByUserId(id);
     }
 }

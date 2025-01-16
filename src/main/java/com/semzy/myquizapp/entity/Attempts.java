@@ -26,7 +26,7 @@ public class Attempts {
     public Attempts() {
     }
 
-    public Attempts(int userId, int score, int totalQuestions) {
+    public Attempts(Long userId, int score, int totalQuestions) {
         this.totalQuestions = totalQuestions;
         this.score = score;
 

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AttemptsRepo extends JpaRepository<Attempts,Integer> {
 
-   Attempts findByUserId(int id);
+   Attempts findByUserId(Long id);
 }

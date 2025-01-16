@@ -1,21 +1,21 @@
 package com.semzy.myquizapp.entity;
 
 public class QuestionAnswerDTO {
-    private int userId;
+    private Long userId;
     private int questionId;
     private String answer;
 
-    public QuestionAnswerDTO(int userId, int questionId, String answer) {
+    public QuestionAnswerDTO(long userId, int questionId, String answer) {
         this.userId = userId;
         this.questionId = questionId;
         this.answer = answer;
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

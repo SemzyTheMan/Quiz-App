@@ -24,7 +24,7 @@ public class QuestionAnswer {
     public QuestionAnswer() {
     }
 
-    public QuestionAnswer(int userId, int questionId, String answer) {
+    public QuestionAnswer(Long userId, int questionId, String answer) {
         this.user = new Users();
         this.user.setId(userId);
 

@@ -37,4 +37,7 @@ public class UserService {
         }
 
     }
+    public Users findByUsername(String username){
+        return  repo.findByUsername(username);
+    }
 }

@@ -1,6 +1,7 @@
 package com.semzy.myquizapp.controller;
 
 import com.semzy.myquizapp.dao.AttemptsRepo;
+import com.semzy.myquizapp.dtos.AttemptResponse;
 import com.semzy.myquizapp.entity.*;
 import com.semzy.myquizapp.service.AttemptsService;
 import com.semzy.myquizapp.service.QuestionService;
@@ -56,17 +57,17 @@ public class QuizController {
     }
 
     @PostMapping("/submit/{userId}")
-    public ResponseEntity<?> submitAnswers(@PathVariable int userId) {
+    public ResponseEntity<?> submitAnswers(@PathVariable Long userId) {
         try {
 
             List<QuestionAnswer> userAnswers = quizService.getAnswersById(userId);
             Attempts existingAttempt = attemptsService.getAttemptByUserId(userId);
 
-            if(existingAttempt!=null){
+            if (existingAttempt != null) {
                 attemptsRepo.delete(existingAttempt);
             }
 
-            userAnswers.forEach(System.out::println);
+
             int score = 0;
             for (QuestionAnswer answer : userAnswers) {
                 Question tempQuestion = questionService.getQuestionById(answer.getQuestion().getId());
@@ -74,13 +75,14 @@ public class QuizController {
                 if (tempQuestion.getAnswer().equalsIgnoreCase(answer.getAnswer())) {
                     score = score + 1;
                 }
-                System.out.println(score);
+
 
             }
             Attempts attempt = new Attempts(userId, score, userAnswers.size());
-            attemptsService.saveAttempt(attempt);
+            Attempts saved = attemptsService.saveAttempt(attempt);
 
-            return new ResponseEntity<>(attempt
+            return new ResponseEntity<>(new AttemptResponse(saved.getUser().getId(),
+                    saved.getScore(), saved.getTotalQuestions())
                     , HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new CustomResponse(

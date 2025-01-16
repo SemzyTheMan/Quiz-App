@@ -11,13 +11,13 @@ public class AttemptsService {
     @Autowired
     private AttemptsRepo attemptsRepo;
 
-    public void saveAttempt(Attempts attempts) {
+    public Attempts saveAttempt(Attempts attempts) {
 
-        attemptsRepo.save(attempts);
+        return attemptsRepo.save(attempts);
 
     }
 
-    public Attempts getAttemptByUserId(int id) {
+    public Attempts getAttemptByUserId(Long id) {
         return attemptsRepo.findByUserId(id);
     }
 }
