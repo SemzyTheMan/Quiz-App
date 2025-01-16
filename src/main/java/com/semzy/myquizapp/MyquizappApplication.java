@@ -1,0 +1,13 @@
+package com.semzy.myquizapp;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MyquizappApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(MyquizappApplication.class, args);
+	}
+
+}
