@@ -1,5 +1,6 @@
 package com.semzy.myquizapp.controller;
 
+import com.semzy.myquizapp.dtos.QuestionResponse;
 import com.semzy.myquizapp.entity.CustomResponse;
 import com.semzy.myquizapp.entity.Question;
 import com.semzy.myquizapp.service.QuestionService;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -50,6 +52,13 @@ public class QuestionController {
     public ResponseEntity<?> getAllQuestions() {
         try {
             List<Question> questions = questionService.loadAllQuestions();
+            List<QuestionResponse> questionResponse = new ArrayList<>();
+
+            for (Question question:questions){
+                questionResponse.add(new QuestionResponse(question.getId()
+                ,question.getOptionA(),question.getOptionB(),question.getOptionC()
+                ,question.getOptionD()));
+            }
             if (questions.isEmpty()) {
                 return new ResponseEntity<>(new CustomResponse(
                         "No questions found",
@@ -60,7 +69,7 @@ public class QuestionController {
             return new ResponseEntity<>(new CustomResponse(
                     "Questions retrieved successfully",
                     HttpStatus.OK.value(),
-                    questions
+                    questionResponse
             ), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new CustomResponse(
@@ -71,7 +80,7 @@ public class QuestionController {
         }
     }
     @GetMapping("/allWithFilter")
-    ResponseEntity<Page<Question>> getFilteredStudent(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    ResponseEntity<Page<QuestionResponse>> getFilteredStudent(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                       @RequestParam(value = "size", defaultValue = "10") Integer size,
                                                       @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
                                                       @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
