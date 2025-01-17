@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  {
+public class SecurityConfig {
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
@@ -28,6 +28,8 @@ public class SecurityConfig  {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    CustomCorsConfiguration customCorsConfiguration;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -36,7 +38,7 @@ public class SecurityConfig  {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/users/**").permitAll()
                         .anyRequest().authenticated()
-                )
+                ).cors(c -> c.configurationSource(customCorsConfiguration))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
@@ -49,6 +51,7 @@ public class SecurityConfig  {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
