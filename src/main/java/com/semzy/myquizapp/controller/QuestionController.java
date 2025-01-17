@@ -4,6 +4,7 @@ import com.semzy.myquizapp.entity.CustomResponse;
 import com.semzy.myquizapp.entity.Question;
 import com.semzy.myquizapp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -68,5 +69,12 @@ public class QuestionController {
                     null
             ), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping("/allWithFilter")
+    ResponseEntity<Page<Question>> getFilteredStudent(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                      @RequestParam(value = "size", defaultValue = "10") Integer size,
+                                                      @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
+                                                      @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+        return ResponseEntity.ok().body(questionService.getFilteredQuestion(page, size, orderBy, direction));
     }
 }

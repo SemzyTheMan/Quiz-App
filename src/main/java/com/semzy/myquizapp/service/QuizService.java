@@ -34,4 +34,5 @@ public class QuizService {
     public List<QuestionAnswer> getAnswersById(Long id) {
         return questionAnswerRepo.findByUserId(id);
     }
+
 }
