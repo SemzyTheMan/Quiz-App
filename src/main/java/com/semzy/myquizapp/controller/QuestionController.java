@@ -55,7 +55,7 @@ public class QuestionController {
             List<QuestionResponse> questionResponse = new ArrayList<>();
 
             for (Question question:questions){
-                questionResponse.add(new QuestionResponse(question.getId()
+                questionResponse.add(new QuestionResponse(question.getId(),question.getThequestion()
                 ,question.getOptionA(),question.getOptionB(),question.getOptionC()
                 ,question.getOptionD()));
             }

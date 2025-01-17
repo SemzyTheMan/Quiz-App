@@ -3,17 +3,27 @@ package com.semzy.myquizapp.dtos;
 public class QuestionResponse {
 
     private int id;
+    private String theQuestion;
     private  String optionA;
     private  String optionB;
     private String optionC;
     private String optionD;
 
-    public QuestionResponse(int id, String optionA, String optionB, String optionC, String optionD) {
+    public QuestionResponse(int id,String theQuestion, String optionA, String optionB, String optionC, String optionD) {
         this.id = id;
+        this.theQuestion=theQuestion;
         this.optionA = optionA;
         this.optionB = optionB;
         this.optionC = optionC;
         this.optionD = optionD;
+    }
+
+    public String getTheQuestion() {
+        return theQuestion;
+    }
+
+    public void setTheQuestion(String theQuestion) {
+        this.theQuestion = theQuestion;
     }
 
     public int getId() {

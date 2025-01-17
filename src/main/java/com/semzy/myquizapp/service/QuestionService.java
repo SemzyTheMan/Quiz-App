@@ -41,7 +41,7 @@ public class QuestionService {
 
         Page<Question> questions = questionRepo.findAll(pageRequest);
 
-        return questions.map(q -> new QuestionResponse(q.getId(), q.getOptionA(), q.getOptionB(), q.getOptionC(), q.getOptionD()));
+        return questions.map(q -> new QuestionResponse(q.getId(),q.getThequestion(), q.getOptionA(), q.getOptionB(), q.getOptionC(), q.getOptionD()));
 
     }
 }
