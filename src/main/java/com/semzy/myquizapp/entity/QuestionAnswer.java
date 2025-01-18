@@ -3,7 +3,9 @@ package com.semzy.myquizapp.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user_answers")
+@Table(name = "user_answers", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"user_id", "question_id"})
+})
 public class QuestionAnswer {
 
     @Id
@@ -14,7 +16,7 @@ public class QuestionAnswer {
     @JoinColumn(name = "user_id")
     private Users user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
 
