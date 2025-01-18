@@ -1,6 +1,5 @@
 package com.semzy.myquizapp.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,7 +13,6 @@ public class Attempts {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private Users user;
 
     @Column(name = "score")

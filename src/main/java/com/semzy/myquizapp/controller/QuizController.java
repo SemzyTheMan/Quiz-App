@@ -52,6 +52,23 @@ public class QuizController {
 
     }
 
+    @GetMapping("/score/{userId}")
+    public ResponseEntity<?> getScore(@PathVariable Long userId) {
+        try{
+            Attempts attempt = attemptsService.getAttemptByUserId(userId);
+            AttemptResponse attemptResponse = new AttemptResponse(attempt.getUser().getId(), attempt.getScore(),attempt.getTotalQuestions());
+            return new ResponseEntity<>(attemptResponse
+                    , HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new CustomResponse(
+                    "Error adding answer",
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    null
+            ), HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+    }
+
     @PostMapping("/submit/{userId}")
     public ResponseEntity<?> submitAnswers(@PathVariable Long userId) {
         try {
