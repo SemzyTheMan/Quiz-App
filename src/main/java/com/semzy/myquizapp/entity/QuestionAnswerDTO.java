@@ -1,14 +1,16 @@
 package com.semzy.myquizapp.entity;
 
+
+import java.util.List;
+
 public class QuestionAnswerDTO {
     private Long userId;
-    private int questionId;
-    private String answer;
 
-    public QuestionAnswerDTO(long userId, int questionId, String answer) {
+    private List<AnswerRequest> answers;
+
+    public QuestionAnswerDTO(Long userId, List<AnswerRequest> answers) {
         this.userId = userId;
-        this.questionId = questionId;
-        this.answer = answer;
+        this.answers = answers;
     }
 
     public Long getUserId() {
@@ -19,19 +21,11 @@ public class QuestionAnswerDTO {
         this.userId = userId;
     }
 
-    public int getQuestionId() {
-        return questionId;
+    public List<AnswerRequest> getAnswers() {
+        return answers;
     }
 
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setAnswers(List<AnswerRequest> answers) {
+        this.answers = answers;
     }
 }

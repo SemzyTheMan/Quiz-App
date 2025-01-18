@@ -36,15 +36,11 @@ public class QuizController {
     }
 
     @PostMapping("/answerQuestions")
-    public ResponseEntity<?> answerQuestion(@RequestBody List<QuestionAnswerDTO> dtos) {
+    public ResponseEntity<?> answerQuestion(@RequestBody QuestionAnswerDTO answers) {
         try {
-            List<QuestionAnswer> answers = dtos.stream().map(dto -> new QuestionAnswer(
-                    dto.getUserId(),
-                    dto.getQuestionId(),
-                    dto.getAnswer()
-            )).toList();
+
             quizService.answerQuestions(answers);
-            return new ResponseEntity<>("Success!!"
+            return new ResponseEntity<>(answers
                     , HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new CustomResponse(
